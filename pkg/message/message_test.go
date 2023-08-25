@@ -11,7 +11,7 @@ import (
 	"github.com/rakutentech/jwk-go/jwk"
 	"github.com/stretchr/testify/assert"
 
-	"uk.co.dudmesh.propolis/internal/service/user"
+	"uk.co.dudmesh.propolis/pkg/user"
 )
 
 func TestMessage(t *testing.T) {
@@ -21,7 +21,7 @@ func TestMessage(t *testing.T) {
 	assert.Nil(err)
 
 	publicKey := privateKey.PublicKey
-	userID := user.UserIDFromPublicKey(&publicKey)
+	userID := user.IDFromPublicKey(&publicKey)
 
 	payload := map[string]interface{}{
 		"data": "hello world",

@@ -19,3 +19,11 @@ func Load() (Config, error) {
 	}
 	return config, nil
 }
+
+func (c *Config) IsProduction() bool {
+	return c.Env == "prod"
+}
+
+func (c *Config) IsDevelopment() bool {
+	return c.Env == "dev"
+}

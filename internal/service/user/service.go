@@ -21,6 +21,7 @@ import (
 	"uk.co.dudmesh.propolis/internal/boot"
 	"uk.co.dudmesh.propolis/internal/model"
 	"uk.co.dudmesh.propolis/internal/userstore"
+	"uk.co.dudmesh.propolis/pkg/user"
 )
 
 const (
@@ -51,7 +52,7 @@ func (s *service) Create(params *model.CreateUserParams) (*model.User, error) {
 	}
 	publicKey := privateKey.PublicKey
 
-	userID := UserIDFromPublicKey(&publicKey)
+	userID := model.UserID(user.IDFromPublicKey(&publicKey))
 
 	privateKeyEnc, err := encodePrivatekey(privateKey, userID, params.Password)
 	if err != nil {
@@ -242,12 +243,4 @@ func privateKeyFromUser(user *model.User, password string) (*ecdsa.PrivateKey, e
 	}
 
 	return keySpec.Key.(*ecdsa.PrivateKey), nil
-}
-
-func UserIDFromPublicKey(publicKey *ecdsa.PublicKey) model.UserID {
-	shaHash := sha256.New()
-	shaHash.Write([]byte(publicKey.X.Bytes()))
-	shaHash.Write([]byte(publicKey.Y.Bytes()))
-	rawID := shaHash.Sum(nil)
-	return model.UserID(base58.Encode(rawID[:]))
 }

@@ -136,7 +136,7 @@ func (d *userstore) createUser(user *model.User) error {
 	return nil
 }
 
-func (d *userstore) PutOutbox(message *model.Message) error {
+func (d *userstore) PutOutbox(message *model.Post) error {
 	panic("TODO")
 	// res, err := d.db.NamedExec(`insert into outbox
 	// 	(ID, CreatedAt, Status, SenderAddress, RecipientAddress, Hash, ContentType, Payload, Signature)

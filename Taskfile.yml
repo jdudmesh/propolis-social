@@ -1,0 +1,16 @@
+version: "3"
+
+dotenv: [".env.local"]
+
+vars:
+  CURRENT_DIR:
+    sh: pwd
+
+tasks:
+  build/tailwind:
+    cmds:
+      - npx tailwindcss -i ./ui/css/input.css -o ./ui/static/main.css
+
+  watch/tailwind:
+    cmds:
+      - npx tailwindcss -i ./ui/css/input.css -o ./ui/static/main.css --watch
