@@ -1,4 +1,4 @@
 .env.local
 .vscode
-data/*
+**/data/*
 __debug_*
